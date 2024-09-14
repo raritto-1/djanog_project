@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block start %}
+<div class="container mt-5">
+    <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Add Recipe</h2>
+
+        <div class="mb-3">
+            <label for="recipeName" class="form-label">Recipe Name</label>
+            <input type="text" name="recipe_name" class="form-control" id="recipeName" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Recipe Description</label>
+            <textarea name="recipe_description" class="form-control" id="description" rows="4" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="recipeImage" class="form-label">Recipe Image</label>
+            <input type="file" name="recipe_image" class="form-control" id="recipeImage">
+        </div>
+
+        <button type="submit" class="btn btn-success">Add Recipe</button>
+    </form>
+
+    <!-- Table to display recipes -->
+    <div class="mt-5">
+        <h2>Recipe List</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Recipe Name</th>
+                    <th scope="col">Recipe Description</th>
+                    <th scope="col">Recipe Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recipe in recipes %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ recipe.recipe_name }}</td>
+                    <td>{{ recipe.recipe_description }}</td>
+                    <td>
+                        {% if recipe.recipe_image %}
+                            <img src="{{ recipe.recipe_image.url }}" alt="{{ recipe.recipe_name }}" style="max-width: 100px;">
+                        {% else %}
+                            No Image
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No recipes available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
