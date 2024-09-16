@@ -70,7 +70,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "food.wsgi.application"
 
-
+LOGIN_URL = '/login'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 

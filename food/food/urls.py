@@ -23,8 +23,11 @@ from django.conf import settings
 urlpatterns = [
        
     path('', veg_views.recipes, name='recipes'),
-
+    path('recipes/delete/<int:recipe_id>/', veg_views.delete_recipe, name='delete_recipe'),
+    path('login', veg_views.login_page, name='login'),
+    path('register', veg_views.register_page, name='register'),
     path('admin/', admin.site.urls),
+    path('logout/', veg_views.log_out, name='logout'),
 ]
 
 if settings.DEBUG:
