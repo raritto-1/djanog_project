@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Finance Data Entry{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Finance Data Entry</h2>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <!-- Date Field -->
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="datetime-local" class="form-control" id="date" name="date">
+            <small class="form-text text-muted">Leave blank to auto-fill with the current date and time.</small>
+        </div>
+        
+        <!-- Amount Field -->
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" id="amount" name="amount" required>
+        </div>
+        
+        <!-- Category Field -->
+        <div class="form-group">
+            <label for="category">Category</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="category" id="income" value="Income" checked>
+                <label class="form-check-label" for="income">Income</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="category" id="expense" value="Expense">
+                <label class="form-check-label" for="expense">Expense</label>
+            </div>
+        </div>
+        
+        <!-- Description Field -->
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+        </div>
+        
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}
