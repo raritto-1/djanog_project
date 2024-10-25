@@ -21,7 +21,7 @@ def calculator(request):
                 description=description
             )
             messages.success(request, 'Transaction added successfully.')
-            return redirect('transaction_history')  # Redirect to transaction history
+            return redirect('calculator')  # optional if any one stay on the same page change to main.py
         except Exception as e:
             messages.error(request, 'Error adding transaction: {}'.format(e))
 

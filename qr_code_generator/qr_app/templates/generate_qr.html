@@ -1,0 +1,81 @@
+<!-- qr_app/templates/qr_app/generate_qr.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #ffcc00; /* Yellow color for heading */
+        }
+        h2 {
+            margin-top: 20px;
+            color: #ffcc00; /* Yellow color for subheading */
+        }
+        .qr-code-img {
+            margin-top: 20px;
+            border: 1px solid #ffcc00; /* Yellow border */
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #222; /* Dark gray background for QR code */
+        }
+        .nav-link {
+            color: #ffcc00; /* Yellow color for links */
+        }
+        .nav-link:hover {
+            color: #fff; /* White color on hover */
+            text-decoration: underline;
+        }
+        .navbar {
+            background-color: #333; /* Dark background for navbar */
+            border-bottom: 2px solid #ffcc00; /* Yellow border at the bottom */
+        }
+        .navbar-nav {
+            margin-left: auto; /* Align nav items to the right */
+            margin-right: auto; /* Align nav items to the left */
+        }
+    </style>
+</head>
+<body style="background-color: #000; color: #fff;">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">QR Code Generator</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="text-center">Generate Your QR Code</h1>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center">
+                <button type="submit" class="btn btn-warning">Generate QR Code</button>
+            </div>
+        </form>
+
+        {% if qr_code_img %}
+            <h2 class="text-center">Your QR Code:</h2>
+            <div class="text-center qr-code-img">
+                <img src="data:image/png;base64,{{ qr_code_img }}" alt="QR Code">
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
