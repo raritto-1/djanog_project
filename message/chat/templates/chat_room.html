@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Chat Room{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Chat with {{ receiver.user_name }}</h1>
+
+<div class="border p-3 mb-4" id="chat-box" style="height: 400px; overflow-y: scroll;">
+    {% for message in messages %}
+        <div class="{% if message.sender == request.user %}text-right{% else %}text-left{% endif %}">
+            <p class="mb-1">
+                <strong>{{ message.sender.user_name }}:</strong> {{ message.text }}
+            </p>
+            <small>{{ message.timestamp|date:"Y-m-d H:i:s" }}</small>
+        </div>
+        <hr>
+    {% endfor %}
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <textarea name="message" class="form-control" rows="3" placeholder="Type your message here..."></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>
+{% endblock %}
