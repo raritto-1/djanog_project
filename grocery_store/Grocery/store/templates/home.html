@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to YourSite!</h1>
+    <p class="lead">A place where you can manage your profile, orders, and cart.</p>
+    <hr class="my-4">
+    <p>Click the buttons below to get started.</p>
+    {% if user.is_authenticated %}
+    <a class="btn btn-primary btn-lg" href="{% url 'dashboard' %}" role="button">Go to Dashboard</a>
+    {% else %}
+    <a class="btn btn-primary btn-lg" href="{% url 'login_view' %}" role="button">Login</a>
+    <a class="btn btn-success btn-lg" href="{% url 'register' %}" role="button">Register</a>
+    {% endif %}
+</div>
+{% endblock %}

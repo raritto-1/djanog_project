@@ -1,0 +1,21 @@
+<!-- order.html -->
+{% extends 'base.html' %}
+{% block container %}
+<div class="container">
+    <h2>Your Orders</h2>
+    {% if orders %}
+    <ul class="list-group">
+        {% for order in orders %}
+        <li class="list-group-item">
+            <div class="d-flex justify-content-between">
+                <span>{{ order.product.name }} - Quantity: {{ order.quantity }}</span>
+                <span>Status: {{ order.status }}</span>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>You have no orders yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

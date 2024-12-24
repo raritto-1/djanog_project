@@ -1,0 +1,25 @@
+<!-- cart.html -->
+{% extends 'base.html' %}
+{% block container %}
+<div class="container">
+    <h2>Your Cart</h2>
+    {% if cart_items %}
+    <ul class="list-group">
+        {% for item in cart_items %}
+        <li class="list-group-item">
+            <div class="d-flex justify-content-between">
+                <span>{{ item.product.name }} - ${{ item.product.price }}</span>
+                <span>Quantity: {{ item.quantity }}</span>
+                <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger">Remove</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <hr>
+    <h4>Total: ${{ total_price }}</h4>
+    <a href="{% url 'place_order' %}" class="btn btn-success">Place Order</a>
+    {% else %}
+    <p>Your cart is empty.</p>
+    {% endif %}
+</div>
+{% endblock %}

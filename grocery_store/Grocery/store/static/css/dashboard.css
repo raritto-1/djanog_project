@@ -1,0 +1,15 @@
+/* CSS for dashboard or page-specific styles */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+img {
+    width: 200px;  /* Adjust the width of the image */
+    height: 200px; /* Ensure the height is equal to the width for a perfect circle */
+    object-fit: cover;  /* Ensures the image covers the entire circle area */
+    border-radius: 50%; /* Creates a circular shape */
+}

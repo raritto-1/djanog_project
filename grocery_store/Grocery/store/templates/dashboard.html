@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    {% load static %}
+    <!-- Link to CSS File -->
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+    <!-- Image in Circle -->
+    <img src="{% static 'image/random_image.png' %}" alt="Random Image">
+
+    <!-- Link to JS File -->
+    <script src="{% static 'js/dashboard.js' %}"></script>
+
+    <h2>Upload an Image</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+    
+</body>
+</html>
