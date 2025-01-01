@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page - Face Recognition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .register-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .camera_container {
+            margin: 20px 0;
+        }
+        video {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #message {
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Register for Face Recognition</h2>
+        <form action="/register" method="POST">
+            <!-- Username Input -->
+            <input type="text" name="username" id="username" placeholder="Enter Username" required>
+
+            <!-- Video Capture Section -->
+            <div class="camera_container">
+                <video id="video" autoplay></video>
+                <button type="button" id="capture_button">Capture Face</button>
+                <canvas id="canvas" width="300" height="200" style="display:none;"></canvas>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Register</button>
+        </form>
+
+        <!-- Placeholder for Messages -->
+        <div id="message">Face capture functionality will be added later.</div>
+    </div>
+    <script>
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas");
+        const captureButton = document.getElementById("capture_button");
+        const messageDiv = document.getElementById("message");
+
+        let captureImage = null;
+
+        // Access the user's camera
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then((stream) => {
+                video.srcObject = stream;
+            })
+            .catch((err) => {
+                console.error("Error: Unable to access camera", err);
+                messageDiv.innerHTML = "Your camera is not accessible or not plugged in.";
+            });
+
+        // Capture image from video
+        captureButton.addEventListener("click", () => {
+            if (!video.srcObject) {
+                messageDiv.innerHTML = "Please allow access to the camera.";
+                return;
+            }
+
+            const context = canvas.getContext("2d");
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            captureImage = canvas.toDataURL("image/jpeg");
+            messageDiv.innerHTML = "Face captured successfully.";
+            console.log("Captured Image Data: ", captureImage); // Debugging output
+        });
+        
+    </script>
+</body>
+</html>
