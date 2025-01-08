@@ -5,6 +5,7 @@
 {% block content %}
 <div class="container mt-5">
     <h2>Finance Data Entry</h2>
+    
     <form method="POST">
         {% csrf_token %}
         
@@ -42,6 +43,8 @@
         
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-danger" onclick="location.href='history'">History</button>
+
     </form>
 </div>
 {% endblock %}

@@ -21,7 +21,7 @@ from calculator.views import *
 
 urlpatterns = [
     path('home/', calculator ,name = 'home'),
-    path('history/', transaction_history, name = 'transaction_history'),
+    path('home/history/', transaction_history, name = 'transaction_history'),
     path('', login_page, name='login'), 
     path('register', register_page, name='register'),
     path('logout/', log_out, name='logout'),
